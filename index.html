@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <input id='user-name' placeholder='user name' />
+  <input id='repo' placeholder='repo' />
+  <button id='but'>validate</button>
+  <script>
+    const inferURL = () => {
+      const userName = window.location.href.split('/')[2].split('.')[0];
+      const repoName = window.location.href.split('/')[3];
+      const extension = window.location.href.split('/')[4];
+      return 'https://' + userName + '.github.io/' + repoName +
+        (extension ? extension : '');
+    }
+    document.getElementById('but').onclick = () => {
+      const userName = document.getElementById('user-name').value;
+      const repo = document.getElementById('repo').value;
+      const validationURL = userName
+        ? `https://validator.w3.org/nu/?doc=https%3A%2F%2F${userName}.github.io%2F${repo}`
+        : 'https://validator.w3.org/nu/?doc=' + encodeURIComponent(inferURL());
+      window.open(validationURL, '_blank');
+    }
+  </script>
+</body>
+
+</html>
