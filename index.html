@@ -4,19 +4,22 @@
 <head>
   <script>
     if (window.location.href.indexOf('.github.io') !== -1) {
-      document.onload = () => {
-        const validator = document.createElement('div');
-        validator.innerHTML = '--> validate this page <--';
+      window.onload = () => {
+        const validator = document.createElement('button');
+        validator.innerHTML = 'validate this page';
         validator.onclick = () => {
           const userName = window.location.href.split('/')[2].split('.')[0];
           const repoName = window.location.href.split('/')[3];
           const extension = window.location.href.split('/')[4];
-          const validationURL = 'https://' + userName + '.github.io/' + repoName +
+          const siteURL = 'https://' + userName + '.github.io/' + repoName +
             (extension ? extension : '');
+          const validationURL = 'https://validator.w3.org/nu/?doc=' + encodeURIComponent(siteURL);
           window.open(validationURL, '_blank');
         }
-        validator.style = 'height: 20px; text-align: center;';
-        document.body.insertBefore(validator, document.body.firstChild);
+        const validateContainer = document.createElement('div');
+        validateContainer.appendChild(validator);
+        validateContainer.style = 'height:25px;text-align:center;border-bottom:solid;margin-bottom:5px';
+        document.body.insertBefore(validateContainer, document.body.firstChild);
       }
     }
   </script>
