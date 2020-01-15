@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    if (window.location.href.indexOf('.github.io') !== -1) {
+      window.onload = () => {
+        const validator = document.createElement('button');
+        validator.innerHTML = 'validate source HTML';
+        validator.setAttribute('aria-label', 'validate source HTML');
+        validator.onclick = () => {
+          const userName = window.location.href.split('/')[2].split('.')[0];
+          const path = window.location.pathname;
+          const siteURL = 'https://' + userName + '.github.io/' + path;
+          const validationURL = 'https://validator.w3.org/nu/?doc=' + encodeURIComponent(siteURL);
+          window.open(validationURL, '_blank');
+        }
+        const validateContainer = document.createElement('div');
+        validateContainer.role = 'button';
+        validateContainer.appendChild(validator);
+        validateContainer.style = 'height:25px;text-align:center;border-bottom:solid;margin-bottom:5px';
+        document.body.insertBefore(validateContainer, document.body.firstChild);
+      }
+    }
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
