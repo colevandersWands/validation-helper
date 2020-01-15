@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
   <script>
     if (window.location.href.indexOf('.github.io') !== -1) {
       window.onload = () => {
@@ -11,10 +10,8 @@
         validator.setAttribute('aria-label', 'validate source HTML');
         validator.onclick = () => {
           const userName = window.location.href.split('/')[2].split('.')[0];
-          const repoName = window.location.href.split('/')[3];
-          const extension = window.location.href.split('/')[4];
-          const siteURL = 'https://' + userName + '.github.io/' + repoName +
-            (extension ? extension : '');
+          const path = window.location.pathname;
+          const siteURL = 'https://' + userName + '.github.io/' + path;
           const validationURL = 'https://validator.w3.org/nu/?doc=' + encodeURIComponent(siteURL);
           window.open(validationURL, '_blank');
         }
